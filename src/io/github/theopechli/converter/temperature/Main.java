@@ -6,60 +6,79 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.print("Convert from:\n(1) Celsius\n(2) Fahrenheit\n" +
-                "(3) Kelvin\n(4) Rankine\n> ");
-        int convertFrom = scanner.nextInt();
+        String input = "";
+        int unit = 0;
 
-        while (convertFrom < 1 || convertFrom > 4) {
-            System.out.print("A valid integer must be provided. [1-4]\n> ");
-            convertFrom = scanner.nextInt();
-        }
+        do {
+            System.out.print("Provide an integer in the range of [1-8]" +
+                    " to convert from:\n(1) Celsius\n(2) Fahrenheit\n" +
+                    "(3) Kelvin\n(4) Rankine\n(5) Delisle\n(6) Newton\n" +
+                    "(7) Reaumur\n(8) Romer\n> ");
 
-        System.out.print("Convert to:\n(1) Celsius\n(2) Fahrenheit\n" +
-                "(3) Kelvin\n(4) Rankine\n> ");
-        int convertTo = scanner.nextInt();
+            try {
+                input = scanner.nextLine();
+                unit = Integer.parseInt(input);
+            } catch (Exception e) {
+                System.out.println("Invalid input.");
+            }
+        } while (unit < 1 || unit > 8);
 
-        while (convertTo < 1 || convertTo > 4) {
-            System.out.print("A valid integer must be provided. [1-4]\n> ");
-            convertTo = scanner.nextInt();
-        }
+        double temperature = 0;
 
-        System.out.print("Input the temperature to be converted.\n> ");
-        double temp = scanner.nextDouble();
+        do {
+            System.out.print("Input the temperature to be converted.\n> ");
+
+            try {
+                input = scanner.nextLine();
+                temperature = Double.parseDouble(input);
+                break;
+            } catch (Exception e) {
+                System.out.println("A valid decimal must be provided");
+            }
+        } while(true);
+
+        scanner.close();
 
         Converter converter = null;
 
-        switch (convertFrom) {
+        switch (unit) {
             case 1:
                 converter = new CelsiusConverter();
-                converter.setConvertFrom("Celsius");
                 break;
             case 2:
                 converter = new FahrenheitConverter();
-                converter.setConvertFrom("Fahrenheit");
-                break;
-            default:
-        }
-
-        switch (convertTo) {
-            case 1:
-                converter.setConvertTo("Celsius");
-                break;
-            case 2:
-                converter.setConvertTo("Fahrenheit");
                 break;
             case 3:
-                converter.setConvertTo("Kelvin");
+                converter = new KelvinConverter();
                 break;
             case 4:
-                converter.setConvertTo("Rankine");
+                converter = new RankineConverter();
+                break;
+            case 5:
+                converter = new DelisleConverter();
+                break;
+            case 6:
+                converter = new NewtonConverter();
+                break;
+            case 7:
+                converter = new ReaumurConverter();
+                break;
+            case 8:
+                converter = new RomerConverter();
                 break;
             default:
+                break;
         }
 
-        System.out.println("Temperature " + temp + " "
-                + converter.getConvertFrom() + " converted to "
-                + converter.convertTemp(temp) + " "
-                + converter.getConvertTo());
+        double c = converter.getCelsius(temperature);
+
+        System.out.println(c + " Celsius\n"
+                + converter.getFahrenheit(c) + " Fahrenheit\n"
+                + converter.getKelvin(c) + " Kelvin\n"
+                + converter.getRankine(c) + " Rankine\n"
+                + converter.getDelisle(c) + " Delisle\n"
+                + converter.getNewton(c) + " Newton\n"
+                + converter.getReaumur(c) + " Reaumur\n"
+                + converter.getRomer(c) + " Romer");
     }
 }
