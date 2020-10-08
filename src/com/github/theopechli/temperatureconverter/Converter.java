@@ -1,4 +1,4 @@
-package io.github.theopechli.converter.temperature;
+package com.github.theopechli.temperatureconverter;
 
 public abstract class Converter {
     public abstract double getCelsius(double temperature);
