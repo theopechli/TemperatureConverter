@@ -2,7 +2,7 @@ package io.github.theopechli.converter.temperature;
 
 public class FahrenheitConverter extends Converter {
     @Override
-    public double convertTemp(double temp) {
-        return temp * 9/5 + 32;
+    public double getCelsius(double f) {
+        return (f - 32) * 5/9;
     }
 }

@@ -2,7 +2,7 @@ package io.github.theopechli.converter.temperature;
 
 public class KelvinConverter extends Converter {
     @Override
-    public double convertTemp(double temp) {
-        return temp * 9/5 + 32;
+    public double getCelsius(double k) {
+        return k - 273.15;
     }
 }
