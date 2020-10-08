@@ -1,24 +1,33 @@
 package io.github.theopechli.converter.temperature;
 
 public abstract class Converter {
-    private String convertFrom;
-    private String convertTo;
+    public abstract double getCelsius(double temperature);
 
-    public void setConvertFrom(String unit) {
-        this.convertFrom = unit;
+    public double getFahrenheit(double c) {
+        return c * 9 / 5 + 32;
     }
 
-    public void setConvertTo(String unit) {
-        this.convertTo = unit;
+    public double getKelvin(double c) {
+        return c + 273.15;
     }
 
-    public String getConvertFrom() {
-        return convertFrom;
+    public double getRankine(double c) {
+        return (c + 273.15) * 9 / 5;
     }
 
-    public String getConvertTo() {
-        return convertTo;
+    public double getDelisle(double c) {
+        return (100 - c) * 3 / 2;
     }
 
-    public abstract double convertTemp(double temp);
+    public double getNewton(double c) {
+        return c * 33 / 100;
+    }
+
+    public double getReaumur(double c) {
+        return c * 4 / 5;
+    }
+
+    public double getRomer(double c) {
+        return c * 21 / 40 + 7.5;
+    }
 }
